@@ -7,23 +7,24 @@
 #include<iostream>
 
 
-typedef std::vector<std::vector<uint8_t>> vec_vec;
+typedef std::vector<std::vector<uint8_t>> vect_vect;
+typedef std::deque<std::pair<int, int>> deq_xy;
 
 
 class Solver {
 public:
 
-	Solver(const vec_vec &mx);
-	vec_vec solve();
+	Solver(const vect_vect &mx);
+	vect_vect solve();
 
-	void print(const vec_vec &mx);
+	void print(const vect_vect &mx);
 
 private:
 
-	vec_vec m;
-	vec_vec ans;
+	vect_vect sudoku;
+	vect_vect ans;
 
-	std::deque<std::pair<int, int>> places;
+	deq_xy places;
 	std::vector <std::deque<int>> deqs;
 
 	const static uint8_t N = 9;

@@ -2,19 +2,18 @@
 
 
 
-Solver::Solver(const vec_vec &mx)
+Solver::Solver(const vect_vect &sdk)
 {
-	m = mx;
+	sudoku = sdk;
 }
 
-vec_vec Solver::solve()
+vect_vect Solver::solve()
 {
 	for (auto j = 0; j < N; ++j)
 		for (auto i = 0; i < N; ++i)
-			if (m[j][i] == 0)
-			{
+			if (sudoku[j][i] == 0)
 				places.push_front(std::make_pair(i, j));
-			}
+			
 
 	deqs.resize(places.size());
 
@@ -23,12 +22,12 @@ vec_vec Solver::solve()
 	return ans;
 }
 
-void Solver::print(const vec_vec &mx)
+void Solver::print(const vect_vect &sdk)
 {
 	for (auto i = 0; i < N; ++i)
 	{
 		for (auto j = 0; j < N; ++j)
-			std::cout << (int)mx[i][j] << " ";
+			std::cout << (int)sdk[i][j] << " ";
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
@@ -40,7 +39,7 @@ void Solver::brute_force(int n)
 {
 	if (n == places.size())
 	{
-		ans = m;
+		ans = sudoku;
 		flag_one_solution = false;
 	}
 	if (n < places.size() && flag_one_solution)
@@ -49,9 +48,9 @@ void Solver::brute_force(int n)
 		{
 			for (auto &dq : deqs[n])
 			{
-				m[places[n].second][places[n].first] = dq;
+				sudoku[places[n].second][places[n].first] = dq;
 				brute_force(n + 1);
-				m[places[n].second][places[n].first] = 0;
+				sudoku[places[n].second][places[n].first] = 0;
 			}
 			deqs[n].clear();
 		}
@@ -67,8 +66,8 @@ bool Solver::set_possible_digs(int x, int y, std::deque<int> &deq)
 	std::vector<bool> contain(N + 1);
 	for (auto i = 0; i < N; ++i)
 	{
-		contain[m[i][x]] = true;
-		contain[m[y][i]] = true;
+		contain[sudoku[i][x]] = true;
+		contain[sudoku[y][i]] = true;
 	}
 
 	int x0 = x / M;
@@ -78,7 +77,7 @@ bool Solver::set_possible_digs(int x, int y, std::deque<int> &deq)
 
 	for (auto i = x0; i < x0 + M; ++i)
 		for (auto j = y0; j < y0 + M; ++j)
-			contain[m[j][i]] = true;
+			contain[sudoku[j][i]] = true;
 
 	bool flag = false;
 	for (auto k = 1; k <= N; ++k)
