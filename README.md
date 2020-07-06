@@ -1,3 +1,5 @@
-# Task-3.1
-#Autor: Sinitsyn Vladimir
-#Group: 3441101/90101
+Task-3.1
+=============================
+Sudoku Solver
+-----------------------------
+This program solves Sudoku by means of brute force.

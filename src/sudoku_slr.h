@@ -7,8 +7,8 @@
 #include<iostream>
 
 
-typedef std::vector<std::vector<uint8_t>> vect_vect;
-typedef std::deque<std::pair<int, int>> deq_xy;
+using vect_vect = std::vector<std::vector<uint8_t>> ;
+
 
 
 class Solver {
@@ -24,7 +24,7 @@ private:
 	vect_vect sudoku;
 	vect_vect ans;
 
-	deq_xy places;
+	std::deque<std::pair<int, int>> places;
 	std::vector <std::deque<int>> deqs;
 
 	const static uint8_t N = 9;
